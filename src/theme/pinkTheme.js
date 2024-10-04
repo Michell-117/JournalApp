@@ -8,7 +8,7 @@ const pinkTheme = createTheme({
         main: '#a380a8',
       },
       secondary: {
-        main: '#5e3461',
+        main: '#4d374f',
       },
       error: {
         main: red.A400,

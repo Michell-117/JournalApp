@@ -1,5 +1,7 @@
 import { CssBaseline, ThemeProvider } from "@mui/material"
+
 import pinkTheme from "./pinkTheme"
+// import { ThemeProvider } from "@emotion/react"
 
 export const AppTheme = ({children}) => {
 
