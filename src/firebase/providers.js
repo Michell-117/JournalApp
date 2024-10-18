@@ -13,9 +13,24 @@ export const signInWithGoogle = async()=>{
         // console.log(user)
         // console.log(user.email,user.displayName)
         const {displayName,email,photoURL,uid} = result.user
-        console.log({displayName,email, photoURL, uid})
+        // console.log({displayName,email, photoURL, uid})
+
+        return{
+            ok: true,
+            displayName,
+            email,
+            photoURL,
+            uid
+        }
 
     } catch (error) {
-        console.log(error)
+        const errorCode = error.code;
+        const errorMessage =error.message;
+
+        return{
+            ok: false,
+            errorMessage,
+            errorCode
+        }
     }
 }
