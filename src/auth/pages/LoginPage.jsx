@@ -1,3 +1,5 @@
+import { useMemo } from 'react'
+import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import {Link as ReactLink} from 'react-router-dom'
 
@@ -11,11 +13,17 @@ import { checkingAuthentication, startGoogleSignIn } from '../../store/auth/thun
 
 export const LoginPage = () => {
 
+  const status = useSelector((state)=>state.auth.status)
+  // console.log(status)
+  
   const dispatch = useDispatch()
+
   const {onInputChange, onResetForm, email,password}=useForm({
     email:'',
     password: ''
   })
+
+  const isAuthenticating = useMemo( ()=> status==='checking' || status==='authenticated',[status] );
 
   const setFormulario = (event)=>{
     event.preventDefault();
@@ -61,13 +69,13 @@ export const LoginPage = () => {
           <Grid2 container direction='row' justifyContent="center"  size={{ xs: 12,sm:12}} spacing={2} sx={ {mt:2} }>
 
             <Grid2 size={{ xs:12, sm:12}} >
-              <Button type='submit' variant="contained" fullWidth onClick={setFormulario}>
+              <Button type='submit' variant="contained" fullWidth onClick={setFormulario} disabled={isAuthenticating}>
                 Login
               </Button>
             </Grid2>
 
             <Grid2 size={{ xs:12, sm:12}} >
-              <Button variant="contained" fullWidth onClick={onGoogleSignIn}>
+              <Button variant="contained" fullWidth onClick={onGoogleSignIn} disabled={isAuthenticating}>
                 <Google/>
               </Button>
             </Grid2>

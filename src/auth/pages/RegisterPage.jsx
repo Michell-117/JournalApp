@@ -1,15 +1,28 @@
 import {Link as ReactLink} from 'react-router-dom'
+import { useForm } from '../../hooks/useForm'
 
-import { Google } from "@mui/icons-material"
 import { Button, Grid2, Link, TextField, Typography } from "@mui/material"
 import { AuthLayout } from '../layout/AuthLayout'
 
 export const RegisterPage = () => {
 
+  const formData = {
+    email: 'michell.117@gmail.com',
+    password: 'michellR',
+    displayName:'Michell Ruiz Arredondo'
+  }
+
+  const {displayName, onInputChange, onResetForm, email,password, formState}=useForm(formData)
+
+  const onSubmit = (event)=>{
+    event.preventDefault()
+    console.log(formState)
+  }
+
   return (
     <AuthLayout title='Crear cuenta'>
 
-      <form>
+      <form onSubmit={onSubmit}>
 
         <Grid2 container>
 
@@ -18,6 +31,9 @@ export const RegisterPage = () => {
               label="Nombre completo" 
               type="text"
               placeholder="Derek Shepard"
+              name='displayName'
+              value={displayName}
+              onChange={onInputChange}
               fullWidth
             />
           </Grid2>
@@ -27,6 +43,9 @@ export const RegisterPage = () => {
               label="Correo" 
               type="email"
               placeholder="Email"
+              name='email'
+              value={email}
+              onChange={onInputChange}
               fullWidth
             />
           </Grid2>
@@ -36,6 +55,9 @@ export const RegisterPage = () => {
               label="Contraseña" 
               type="password"
               placeholder="Contraseña"
+              name='password'
+              value={password}
+              onChange={onInputChange}
               fullWidth
             />
           </Grid2>
@@ -43,7 +65,7 @@ export const RegisterPage = () => {
           <Grid2 container direction='row' justifyContent="center"  size={{ xs: 12,sm:12}} spacing={2} sx={ {mt:2} }>
 
             <Grid2 size={{ xs:12, sm:12}} >
-              <Button variant="contained" fullWidth>
+              <Button type='submit' variant="contained" fullWidth >
                 Crear cuenta
               </Button>
             </Grid2>
